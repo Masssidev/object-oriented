@@ -1,5 +1,8 @@
 # 스프링 MVC를 이용한 게시판 구축
 
+> github 실습 링크 <br/>
+> <https://github.com/Masssidev/springMVC-board>
+
 ### URL과 @RequestMapping 연결하기
 웹 상에서 클라이언트의 요청은 모두 URL 기반으로 이뤄진다. 웹 서버는 클라이언트가 요청한 URL정보를 이용해 서버의 특정 구성 요소에서 서비스를 처리한 후 
 그 결과를 클라이언트에게 응답으로 보내준다. 스프링 MVC에서는 @Controller 어노테이션이 붙은 클래스 안에 @RequestMapping 어노테이션이 붙은 메서드에서
