@@ -189,3 +189,58 @@ BinaryOperator<T, T> | T apply(T t, T t) | 이항 연산 인터페이스
 함수형 인터페이스를 정의해서 사용하면 된다.
 
 ### 컬렉션 스트림에서 람다 사용
+```
+public class B011 {
+ public static void main (String[] args) {
+  Integer[] args = { 20, 25, 18, 27, 30, 21, 17, 19, 34, 28 };
+  
+  for(int i=0; i < ages.length; i++) {
+   if(ages[i] < 20) {
+    System.out.format("Age %d!!! Can't enter\n", ages[i]);
+   }
+  }
+ }
+}
+```
+> 반복문을 이용해 루프를 제어하는 코드다. 문제는 없지만 가끔 프로그래머들은 <를 써야 할 곳에 <=를 사용한다거나, i 변수의 초깃값을 0이 아닌 1로 초기화하는 실수를 하면서 문제가 생기기도 한다.
+
+```
+public class B012 {
+ public static void main(String[] args) {
+  Integer[] ages = { 20, 25, 18, 27, 30, 21, 17, 19, 34, 28 };
+  
+  for (int age : ages) {
+   if(age < 20) {
+    System.out.format("Age %d!!! Can't enter\n", age);
+   }
+  }
+ }
+}
+```
+> for each 구문을 사용해 배열 첨자를 사용하지 않는 코드로 변경했다.
+```
+import java.util.Arrays;
+
+public class B013 {
+ public static void main(String[] args) {
+  Integer[] ages = { 20, 25, 18, 27, 30, 21, 17, 19, 34, 28 };
+  
+  Arrays.stream(ages)
+        .filter(age -> age <20)
+        .forEach(age -> System.out.format("Age %d!!! Can't enter\n", age));
+ }
+}
+```
+> 컬렉션 스트림 이용<br/>
+* 기존 배열을 이용해 스트림을 얻으려면 Arrays 클래스의 stream()정적 메서드를 사용하면 된다.
+* filter 메서드는 SQL 구문에서 where 절과 같은 역할을 수행한다. where과 마찬가지로 true/false를 반환하는 조건이 필요하다. 함수형 인터페이스 중에서 true/false를 단정 짓는 Predicate 함수형 인터페이스를 filter 메서드의 인자로 제공하면 된다.
+* 스트림 내부 반복을 실행하는 forEach 메서드를 사용했다. forEach 구문은 전달된 인자를 소비하는 함수형 인터페이스, 즉 Consumer를 요구한다.
+
+> 가장 좋아진 점은 How가 아닌 What만을 지정했다는 것이다. 함수형 프로그래밍의 장점인 선언적 프로그래밍을 활용하는 것이다. 이는 SQL 구문과 유사하다. 
+SQL을 작성할 때 '어떻게 하라'를 명령하는 것이 아니고 '무엇을 원한다'라고 선언하는 것과 같다. 또한 스트림은 메서드 체인 패턴을 이용해 최종 연산이 아닌 모든 중간 연산은 다시 스트림을 반환해 코드를 간략하게 작성할 수 있게 지원한다.
+* 20세 미만인 경우를 선별(filter)해 주세요.
+* 선별된 각 요소에 대해 입장이 불가하다고 해주세요.
+> 스트림은 고객의 요구를 선언적으로 코딩할 수 있는 힘을 준다. 고객도 해당 코드가 무슨 일을 하는지 파악하는데 크게 문제가 없다. 이렇게 의사소통 내용 자체가 그대로 코드로 구현되는 것이 선언적 프로그래밍의 장점이다.
+
+> 스트림은 컬렉션 스트림을 다른 컬렌션 스트림으로 변환하는 map, 집계 함수인 sum, count, average, min, max뿐만 아니라 특정 기준에 의한 그룹화(grouping) 지원 등 많은 메서드를 제공해준다.
+
