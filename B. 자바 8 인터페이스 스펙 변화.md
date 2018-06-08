@@ -117,3 +117,75 @@ a 가 int일 수 밖에 없음을 runSomething메서드 정의에서 알 수 있
 a -> a * a;
 ```
 
+### 메서드 호출 인자로 람다 사용
+람다식을 메서드의 인자로도 사용할 수 있다.
+```
+public class B007 {
+ public static void main(String[] args) {
+  MyFunctionalInterface mfi = a -> a * a;
+  
+  doIt(mfi);
+ }
+ 
+ public static void doIt(MyFunctionalInterface mfi) {
+  int b = mfi.runSomething(5);
+  
+  System.out.println(b);
+ }
+}
+```
+> 메서드 인자로 람다식(함수형 인터페이스) 참조 변수 사용<br/>
+람다식을 단 한번만 사용한다면 굳이 변수에 할당할 필요도 없다.
+```
+public class B007 {
+ public static void main(String[] args) {
+  doIt(a -> a * a);
+ }
+ 
+ public static void doIt(MyFunctionalInterface mfi) {
+  int b = mfi.runSomething(5);
+  
+  System.out.println(b);
+ }
+}
+```
+> 메서드 인자로 람다식(함수형 인터페이스) 사용
+
+### 메서드 반환값으로 람다 사용
+```
+public class B007 {
+ public static void main(String[] args) {
+  MyFunctionalInterface mfi = todo();
+  
+  int result = mfi.runSomething(3);
+  
+  System.out.println(result);
+ }
+ 
+ public static MyFunctionalInterface todo() {
+  return num -> num * num;
+ }
+}
+```
+> 메서드 반환값으로 람다식(함수형 인터페이스) 사용
+
+### 자바 8 API에서 제공하는 함수형 인터페이스
+개발자들이 많이 쓸 것이라고 예상되는 함수형 인터페이스를 이미 java.util.function 패키지와 여러 패키지에서 제공하고 있다.
+
+함수형 인터페이스 | 추상 메서드 | 용도
+:----------------:|:------------:|:------:
+Runnable | void run() | **실행**할 수 있는 인터페이스
+Supplier<T> | T get() | **제공**할 수 있는 인터페이스
+Consumer<T> | void accept(T t) | **소비**할 수 있는 인터페이스
+Function<T, R> | R apply(T t) | **입력을 받아서 출력**할 수 있는 인터페이스
+Predicate<T> | Boolean test(T t) | 입력을 받아 **참/거짓을 단정**할 수 있는 인터페이스
+UnaryOperator<T> | T apply(T t) | **단항(Unary) 연산**할 수 있는 인터페이스
+BiConsumer<T, U> | void accept(T t, U u) | 이항 소비자 인터페이스
+BiFunction<T, U, R> | R apply(T t, U u) | 이항 함수 인터페이스
+BiPredicate<T, U> | Boolean test(T t, U u) | 이항 단정 인터페이스
+BinaryOperator<T, T> | T apply(T t, T t) | 이항 연산 인터페이스
+
+> java.util.function 패키지에는 총 43개의 함수형 인터페이스를 제공한다.<br/> 만약 43개 중에서 필요로 하는 함수형 인터페이스가 없다면 사용자 정의
+함수형 인터페이스를 정의해서 사용하면 된다.
+
+### 컬렉션 스트림에서 람다 사용
