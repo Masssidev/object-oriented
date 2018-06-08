@@ -277,14 +277,14 @@ Arrays.stream(nums).map(Math::sqrt).forEach(System.out::println);
 BiFunction<Integer, Integer, Integer> bip_lambda = Integer::compareTo;
 ```
 * 클래스::정적 메서드
- * num -> Math.sqrt(num)
- * Math::sqrt
+  * num -> Math.sqrt(num)
+  * Math::sqrt
 * 인스턴스::인스턴스메서드
- * sqrtNum -> System.out.println(sqrtNum)
- * System.out::println
+  * sqrtNum -> System.out.println(sqrtNum)
+  * System.out::println
 * 클래스::인스턴스메서드
- * (a, b) -> a.compareTo(b)
- * Integer::compartTo
+  * (a, b) -> a.compareTo(b)
+  * Integer::compartTo
  
 메서드 레퍼런스 유형 | 람다식의 인자
 :--------------------:|:-----------:
@@ -295,7 +295,7 @@ BiFunction<Integer, Integer, Integer> bip_lambda = Integer::compareTo;
 생성자 레퍼런스
 > 클래스::new
 ```
-클래스 인스턴스 = 클래스::new;
+클래스 인스턴스 = 클래스::new;(X)
 ```
 위는 에러다. 생성자 레퍼런스로 생성한 것은 클래스의 객체가 아니라 함수형 인터페이스 구현 객체이기 때문이다. 생성자가 기본 생성자라면 이를 만족하는 Supplier함수형 인터페이스를 사용해 생성자 자체에 대한 참조가 만들어진다.
 ```
@@ -312,6 +312,7 @@ Supplier<클래스> 인스턴스 = () -> 클래스();
 자바 8 이전 인터페이스가 가질 수 있는 멤버
 * 정적 상수
 * 추상 인스턴스 메서드
+
 자바 8 이후 인터페이스가 가질 수 있는 멤버
 * 정적 상수
 * 추상 인스턴스 메서드
